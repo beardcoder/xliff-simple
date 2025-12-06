@@ -1,0 +1,28 @@
+# Source files (only ship dist/)
+src/
+
+# Tests
+*.test.ts
+*.spec.ts
+
+# Development files
+.github/
+.vscode/
+.idea/
+tsconfig.json
+bunup.config.ts
+
+# Build tools
+.turbo/
+*.tsbuildinfo
+
+# CI/CD
+.travis.yml
+.gitlab-ci.yml
+.circleci/
+
+# Misc
+.DS_Store
+*.log
+.env
+.env.*

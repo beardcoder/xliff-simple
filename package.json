@@ -1,0 +1,89 @@
+{
+  "name": "xliff-simple",
+  "version": "0.1.0",
+  "description": "Simple TypeScript library for reading, writing, and validating XLIFF 1.2 and 2.0 files with seamless version conversion",
+  "license": "MIT",
+  "author": "Markus Sommer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beardcoder/xliff-simple.git"
+  },
+  "bugs": {
+    "url": "https://github.com/beardcoder/xliff-simple/issues"
+  },
+  "homepage": "https://github.com/beardcoder/xliff-simple#readme",
+  "keywords": [
+    "xliff",
+    "xliff-1.2",
+    "xliff-2.0",
+    "translation",
+    "localization",
+    "l10n",
+    "i18n",
+    "xml",
+    "parser",
+    "typescript"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "bunup",
+    "dev": "bunup --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix && prettier --write .",
+    "prepare": "lint-staged",
+    "test": "bun test",
+    "prepublishOnly": "bun run type-check && bun run test && bun run build",
+    "release": "release-it",
+    "release:minor": "release-it minor",
+    "release:major": "release-it major"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@release-it/conventional-changelog": "^10.0.2",
+    "@types/bun": "^1.3.3",
+    "bunup": "^0.16.10",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "jiti": "^2.6.1",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.4",
+    "release-it": "^19.0.6",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.48.1"
+  },
+  "peerDependencies": {
+    "typescript": ">=4.5.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "fast-xml-parser": "^5.3.2"
+  },
+  "lint-staged": {
+    ".{ts,js}": "eslint --cache --fix",
+    ".{ts,js,css,md}": "prettier --write",
+    ".js": "eslint --cache --fix",
+    ".{js,css,md}": "prettier --write"
+  }
+}
