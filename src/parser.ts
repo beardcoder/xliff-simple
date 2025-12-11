@@ -1,10 +1,5 @@
 import { XMLParser } from "fast-xml-parser";
-import type {
-  XliffDocument,
-  TranslationFile,
-  TranslationUnit,
-  TranslationState,
-} from "./types.js";
+import type { XliffDocument, TranslationFile, TranslationUnit, TranslationState } from "./types.js";
 
 const parser = new XMLParser({
   ignoreAttributes: false,
@@ -36,15 +31,18 @@ function parseXliff12(parsed: any): XliffDocument {
         datatype: file["@_datatype"],
         date: file["@_date"],
         productName: file["@_product-name"],
-        units: transUnits.map(
-          (unit): TranslationUnit => ({
+        units: transUnits.map((unit): TranslationUnit => {
+          const hasTarget = unit.target !== undefined && unit.target !== "";
+          const isApproved = () => (unit["@_approved"] === "yes" ? "final" : undefined);
+
+          return {
             id: unit["@_id"] || "",
             source: unit.source || "",
             target: unit.target,
-            state: unit["@_approved"] === "yes" ? "final" : "initial",
+            state: hasTarget ? isApproved() : undefined,
             note: unit.note,
-          })
-        ),
+          };
+        }),
       };
     }),
   };

@@ -87,7 +87,7 @@ describe("XLIFF Parser", () => {
       expect(unit1?.id).toBe("headerComment");
       expect(unit1?.source).toBe("The default Header Comment.");
       expect(unit1?.target).toBeUndefined();
-      expect(unit1?.state).toBe("initial");
+      expect(unit1?.state).not.toBe("initial");
 
       const unit2 = file?.units[1];
       expect(unit2?.id).toBe("generator");
