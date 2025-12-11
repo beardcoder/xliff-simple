@@ -1,6 +1,6 @@
-export type XliffVersion = "1.2" | "2.0";
+export type XliffVersion = '1.2' | '2.0';
 
-export type TranslationState = "initial" | "translated" | "reviewed" | "final";
+export type TranslationState = 'initial' | 'translated' | 'reviewed' | 'final';
 
 export interface TranslationUnit {
   id: string;

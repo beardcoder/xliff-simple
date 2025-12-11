@@ -41,7 +41,7 @@ yarn add xliff-simple
 ### Parsing XLIFF Files
 
 ```typescript
-import { parse } from "xliff-simple";
+import { parse } from 'xliff-simple';
 
 const xliffContent = `<?xml version="1.0" encoding="UTF-8"?>
 <xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en">
@@ -62,21 +62,21 @@ console.log(document.files[0]?.units[0]?.source); // 'Hello World'
 ### Writing XLIFF Files
 
 ```typescript
-import { write, type XliffDocument } from "xliff-simple";
+import { write, type XliffDocument } from 'xliff-simple';
 
 const document: XliffDocument = {
-  version: "2.0",
+  version: '2.0',
   files: [
     {
-      id: "f1",
-      sourceLanguage: "en",
-      targetLanguage: "de",
+      id: 'f1',
+      sourceLanguage: 'en',
+      targetLanguage: 'de',
       units: [
         {
-          id: "hello",
-          source: "Hello World",
-          target: "Hallo Welt",
-          state: "final",
+          id: 'hello',
+          source: 'Hello World',
+          target: 'Hallo Welt',
+          state: 'final',
         },
       ],
     },
@@ -90,37 +90,37 @@ console.log(xliff);
 ### Converting Between Versions
 
 ```typescript
-import { parse, write } from "xliff-simple";
+import { parse, write } from 'xliff-simple';
 
 // Parse XLIFF 1.2
 const xliff12 = parse(xliff12Content);
 
 // Write as XLIFF 2.0
-const xliff20Content = write(xliff12, "2.0");
+const xliff20Content = write(xliff12, '2.0');
 ```
 
 ### Validating XLIFF Documents
 
 ```typescript
-import { validate } from "xliff-simple";
+import { validate } from 'xliff-simple';
 
 const result = validate(document);
 
 if (result.valid) {
-  console.log("Document is valid");
+  console.log('Document is valid');
 } else {
-  console.error("Validation errors:", result.errors);
+  console.error('Validation errors:', result.errors);
 }
 ```
 
 ### Customizing Output with Writer Options
 
 ```typescript
-import { write, type WriterOptions } from "xliff-simple";
+import { write, type WriterOptions } from 'xliff-simple';
 
 const options: WriterOptions = {
   format: true, // Pretty-print output (default: true)
-  indent: "  ", // Use 2-space indentation (default: 4 spaces)
+  indent: '  ', // Use 2-space indentation (default: 4 spaces)
   suppressXmlDeclaration: false, // Include XML declaration (default: false)
 };
 
@@ -142,13 +142,13 @@ const xml = write(document, undefined, options);
 const minified = write(doc, undefined, { format: false });
 
 // Tab indentation
-const tabbed = write(doc, undefined, { indent: "\t" });
+const tabbed = write(doc, undefined, { indent: '\t' });
 
 // No XML declaration (useful for embedding)
 const noDecl = write(doc, undefined, { suppressXmlDeclaration: true });
 
 // Combine version conversion with options
-const converted = write(doc, "1.2", { indent: "  " });
+const converted = write(doc, '1.2', { indent: '  ' });
 ```
 
 ## API
@@ -179,7 +179,7 @@ Validates an XLIFF document and returns validation errors if any.
 
 ```typescript
 interface XliffDocument {
-  version: "1.2" | "2.0";
+  version: '1.2' | '2.0';
   files: TranslationFile[];
 }
 ```
@@ -206,7 +206,7 @@ interface TranslationUnit {
   id: string;
   source: string;
   target?: string;
-  state?: "initial" | "translated" | "reviewed" | "final";
+  state?: 'initial' | 'translated' | 'reviewed' | 'final';
   note?: string;
 }
 ```

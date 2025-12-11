@@ -1,5 +1,5 @@
-import { describe, test, expect } from "bun:test";
-import { parse } from "./parser.js";
+import { describe, test, expect } from 'bun:test';
+import { parse } from './parser.js';
 
 const xliff12Source = `<?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
@@ -67,119 +67,130 @@ const xliff20Target = `<?xml version="1.0" encoding="UTF-8"?>
     </file>
 </xliff>`;
 
-describe("XLIFF Parser", () => {
-  describe("XLIFF 1.2", () => {
-    test("parses source-only XLIFF 1.2", () => {
+describe('XLIFF Parser', () => {
+  describe('XLIFF 1.2', () => {
+    test('parses source-only XLIFF 1.2', () => {
       const result = parse(xliff12Source);
 
-      expect(result.version).toBe("1.2");
+      expect(result.version).toBe('1.2');
       expect(result.files).toHaveLength(1);
 
       const file = result.files[0];
-      expect(file?.sourceLanguage).toBe("en");
+
+      expect(file?.sourceLanguage).toBe('en');
       expect(file?.targetLanguage).toBeUndefined();
-      expect(file?.datatype).toBe("plaintext");
-      expect(file?.original).toBe("test.xlf");
-      expect(file?.productName).toBe("my_ext");
+      expect(file?.datatype).toBe('plaintext');
+      expect(file?.original).toBe('test.xlf');
+      expect(file?.productName).toBe('my_ext');
       expect(file?.units).toHaveLength(2);
 
       const unit1 = file?.units[0];
-      expect(unit1?.id).toBe("headerComment");
-      expect(unit1?.source).toBe("The default Header Comment.");
+
+      expect(unit1?.id).toBe('headerComment');
+      expect(unit1?.source).toBe('The default Header Comment.');
       expect(unit1?.target).toBeUndefined();
-      expect(unit1?.state).not.toBe("initial");
+      expect(unit1?.state).not.toBe('initial');
 
       const unit2 = file?.units[1];
-      expect(unit2?.id).toBe("generator");
+
+      expect(unit2?.id).toBe('generator');
       expect(unit2?.source).toBe('The "Generator" Meta Tag.');
     });
 
-    test("parses XLIFF 1.2 with targets", () => {
+    test('parses XLIFF 1.2 with targets', () => {
       const result = parse(xliff12Target);
 
-      expect(result.version).toBe("1.2");
+      expect(result.version).toBe('1.2');
       expect(result.files).toHaveLength(1);
 
       const file = result.files[0];
-      expect(file?.sourceLanguage).toBe("en");
-      expect(file?.targetLanguage).toBe("de");
+
+      expect(file?.sourceLanguage).toBe('en');
+      expect(file?.targetLanguage).toBe('de');
       expect(file?.units).toHaveLength(2);
 
       const unit1 = file?.units[0];
-      expect(unit1?.id).toBe("headerComment");
-      expect(unit1?.source).toBe("The default Header Comment.");
-      expect(unit1?.target).toBe("Der Standard-Header-Kommentar.");
-      expect(unit1?.state).toBe("final");
+
+      expect(unit1?.id).toBe('headerComment');
+      expect(unit1?.source).toBe('The default Header Comment.');
+      expect(unit1?.target).toBe('Der Standard-Header-Kommentar.');
+      expect(unit1?.state).toBe('final');
 
       const unit2 = file?.units[1];
-      expect(unit2?.id).toBe("generator");
+
+      expect(unit2?.id).toBe('generator');
       expect(unit2?.target).toBe('Der "Generator"-Meta-Tag.');
-      expect(unit2?.state).toBe("final");
+      expect(unit2?.state).toBe('final');
     });
   });
 
-  describe("XLIFF 2.0", () => {
-    test("parses source-only XLIFF 2.0", () => {
+  describe('XLIFF 2.0', () => {
+    test('parses source-only XLIFF 2.0', () => {
       const result = parse(xliff20Source);
 
-      expect(result.version).toBe("2.0");
+      expect(result.version).toBe('2.0');
       expect(result.files).toHaveLength(1);
 
       const file = result.files[0];
-      expect(file?.id).toBe("f1");
-      expect(file?.sourceLanguage).toBe("en");
+
+      expect(file?.id).toBe('f1');
+      expect(file?.sourceLanguage).toBe('en');
       expect(file?.targetLanguage).toBeUndefined();
       expect(file?.units).toHaveLength(2);
 
       const unit1 = file?.units[0];
-      expect(unit1?.id).toBe("headerComment");
-      expect(unit1?.source).toBe("The default Header Comment.");
+
+      expect(unit1?.id).toBe('headerComment');
+      expect(unit1?.source).toBe('The default Header Comment.');
       expect(unit1?.target).toBeUndefined();
 
       const unit2 = file?.units[1];
-      expect(unit2?.id).toBe("generator");
+
+      expect(unit2?.id).toBe('generator');
       expect(unit2?.source).toBe('The "Generator" Meta Tag.');
     });
 
-    test("parses XLIFF 2.0 with targets", () => {
+    test('parses XLIFF 2.0 with targets', () => {
       const result = parse(xliff20Target);
 
-      expect(result.version).toBe("2.0");
+      expect(result.version).toBe('2.0');
       expect(result.files).toHaveLength(1);
 
       const file = result.files[0];
-      expect(file?.id).toBe("f1");
-      expect(file?.sourceLanguage).toBe("en");
-      expect(file?.targetLanguage).toBe("de");
+
+      expect(file?.id).toBe('f1');
+      expect(file?.sourceLanguage).toBe('en');
+      expect(file?.targetLanguage).toBe('de');
       expect(file?.units).toHaveLength(2);
 
       const unit1 = file?.units[0];
-      expect(unit1?.id).toBe("headerComment");
-      expect(unit1?.source).toBe("The default Header Comment.");
-      expect(unit1?.target).toBe("Der Standard-Header-Kommentar.");
-      expect(unit1?.state).toBe("final");
+
+      expect(unit1?.id).toBe('headerComment');
+      expect(unit1?.source).toBe('The default Header Comment.');
+      expect(unit1?.target).toBe('Der Standard-Header-Kommentar.');
+      expect(unit1?.state).toBe('final');
 
       const unit2 = file?.units[1];
-      expect(unit2?.id).toBe("generator");
+
+      expect(unit2?.id).toBe('generator');
       expect(unit2?.target).toBe('Der "Generator"-Meta-Tag.');
-      expect(unit2?.state).toBe("final");
+      expect(unit2?.state).toBe('final');
     });
   });
 
-  describe("Error handling", () => {
-    test("throws error for invalid XML", () => {
-      expect(() => parse("not xml")).toThrow();
+  describe('Error handling', () => {
+    test('throws error for invalid XML', () => {
+      expect(() => parse('not xml')).toThrow();
     });
 
-    test("throws error for missing xliff root", () => {
-      expect(() => parse('<?xml version="1.0"?><root></root>')).toThrow(
-        "Invalid XLIFF"
-      );
+    test('throws error for missing xliff root', () => {
+      expect(() => parse('<?xml version="1.0"?><root></root>')).toThrow('Invalid XLIFF');
     });
 
-    test("throws error for unsupported version", () => {
+    test('throws error for unsupported version', () => {
       const xml = '<?xml version="1.0"?><xliff version="3.0"></xliff>';
-      expect(() => parse(xml)).toThrow("Unsupported XLIFF version");
+
+      expect(() => parse(xml)).toThrow('Unsupported XLIFF version');
     });
   });
 });
